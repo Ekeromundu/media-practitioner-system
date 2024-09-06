@@ -1,32 +1,61 @@
 @extends('layouts.app')
 
-<div class="container"> <div class="row"> <div class="col-md-6"> <div class="card"> <form onsubmit="event.preventDefault()" class="box"> <h1>Login</h1> <p class="text-muted"> Please enter your login and password!</p> <input type="text" name="" placeholder="Username"> <input type="password" name="" placeholder="Password"> <a class="forgot text-muted" href="#">Forgot password?</a> <input type="submit" name="" value="Login" href="#"> <div class="col-md-12"> <ul class="social-network social-circle"> <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li> <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li> <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li> </ul> </div> </form> </div> </div> </div>
+@section('content')
+<div class="container"> 
+    <div class="row"> 
+    <div class="col-md-6">
+        <div class="card">
+         <form action="{{route('login_post')}}" method="post" class="box" id="registrationForm"> 
+         @csrf
+         <img src=  "{{ asset('images/GRN.PNG') }}">
+         <h1>Login</h1>
+         
+         <p class="text-muted">
+                 Please enter your login and password!</p>
+                  <input type="text" name="email" placeholder="Username" required> 
+                  @if($errors->has('email'))
+                            <span class="text-danger">{{ $errors->first('email')}}</span>
+                @endif
+                  <input type="password" name="password" placeholder="Password" required>
+                  @if($errors->has('password'))
+                            <span class="text-danger">{{ $errors->first('password')}}</span>
+                    @endif
+
+                  <a class="forgot text-muted" href="#">Forgot password?</a>
+                
+                <button class="btn btn-dark" id="btnRegister">Login</button>
+
+                     </form>
+     </div> 
+    </div>
 </div>
+</div>
+
 
 <style>
     body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: linear-gradient(to right, #b92b27, #1565c0)
+    background: #fff;
 }
 
 .card{
-    margin-bottom:20px;
-    border:none;
+    margin-bottom:10px;
+    border: #BD3518
 }
 
 .box {
     width: 500px;
-    padding: 40px;
+    padding: 10px ;
     position: absolute;
-    top: 50%;
+    top: 0%;
     left: 50%;
-    background: #191919;
-    ;
+    background: #44BCDD;
     text-align: center;
     transition: 0.25s;
-    margin-top: 100px
+    margin-top: 10px;
+    border:#BD3518;
 }
 
 .box input[type="text"],
@@ -143,5 +172,14 @@ a.socialIcon:hover,
     transition: all 0.8s;
     transition: all 0.8s
 }
+.outlined-box {
+    border-top: 2px solid black;
+    border-right: 4px dashed red;
+    border-bottom: 2px solid black;
+    border-left: 4px dashed red;
+}
+
 
 </style>
+
+@endsection

@@ -23,7 +23,7 @@
 
         /* Style the footer to be fixed at the bottom */
         footer {
-            position: fixed;
+            position: relative;
             bottom: 0;
             width: 100%;
             background-color: #f1f1f1;

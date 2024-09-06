@@ -13,14 +13,38 @@ return new class extends Migration
     {
         Schema::create('media_practitioners', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('organization');
-            $table->string('description');
-            $table->foreignId('location_id');
-            $table->string('award/recognitions');
-            $table->string('specialization');
-            $table->string('experience_level');
-            $table->string('profile_photo');
+            $table->string('Surname');
+            $table->string('maiden_name');
+            $table->string('firstname');
+            $table->date('DOB');
+            $table->string('POB');
+            $table->string('nationality');
+            $table->string('IDNO');
+            $table->string('sex');
+            $table->string('employer');
+            $table->string('baddress');
+            $table->string('email');
+            $table->string('fax');
+            $table->string('tel');
+            $table->string('raddress');
+            $table->string('remail');
+            $table->string('rfax');
+            $table->string('rtel');
+
+            $table->string('capacity');
+            $table->string('institutionaddress');
+            $table->string('postadd');
+            $table->string('city');
+            $table->string('country');
+            $table->string('contact');
+            $table->string('instutitionTel');
+            $table->string('instutitionEmail');
+            $table->string('visa');
+            $table->string('issuedat');
+            $table->string('dateissued');
+            $table->string('expiry_date');
+            $table->string('status');
+                    $table->string('profile_photo');
             $table->timestamps();
         });
     }

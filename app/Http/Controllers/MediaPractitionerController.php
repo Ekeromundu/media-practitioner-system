@@ -15,17 +15,17 @@ class MediaPractitionerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required',
+            'firstname' => 'required',
             'email' => 'required|email|unique:media_practitioners',
-            'phone' => 'required',
+            'Surname' => 'required',
             'media_house' => 'required',
-            'credentials' => 'required|file|mimes:pdf,jpg,png',
+            'profile_photo' => 'required|file|mimes:pdf,jpg,png',
         ]);
 
         // Handle file upload
-        if ($request->hasFile('credentials')) {
-            $path = $request->file('credentials')->store('credentials');
-            $validated['credentials'] = $path;
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile_photo');
+            $validated['profile_photo'] = $path;
         }
 
         MediaPractitioner::create($validated);

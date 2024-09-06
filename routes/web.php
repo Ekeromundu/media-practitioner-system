@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\MediaPractitionerController;
-
+use App\Http\Controllers\PublicRelationsOfficerApprovalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +22,10 @@ Route::get('/', function () {
 });
 
 //Auth
-Route::get('/auth/login', [AuthController::class, 'login']);
+Route::get('/auth/login' , [AuthController::class, 'login'])->name('login-form');
+Route::post('/auth/login', [AuthController::class, 'Post_login'])->name('login_post'); // login process
+
+
 Route::get('/auth/register', [AuthController::class, 'register']);
 
 // Routes for the media practitioner
@@ -33,6 +36,9 @@ Route::get('/media-practitioners/single', [MediaPractitionerController::class, '
 
 
 // routes for admin 
+
+Route::get('/register/admin', [AuthController::class , 'createAdmin'])->name('create.admin');
+Route::post('/register/admin', [AuthController::class , 'storeAdmin'])->name('store.admin');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::post('/admin/approve/{id}', [AdminController::class, 'approve'])->name('admin.approve');
 Route::post('/admin/reject/{id}', [AdminController::class, 'reject'])->name('admin.reject');
@@ -45,7 +51,7 @@ Route::post('/feedback/{pro_id}', [FeedbackController::class, 'store'])->name('f
 
 // PROs
 use App\Http\Controllers\PublicRelationsOfficerController;
-use App\Http\Controllers\Admin\PublicRelationsOfficerApprovalController;
+
 
 Route::get('/public-relations-officers/register', [PublicRelationsOfficerController::class, 'create'])->name('public_relations_officers.create');
 Route::post('/public-relations-officers/register', [PublicRelationsOfficerController::class, 'store'])->name('public_relations_officers.store');

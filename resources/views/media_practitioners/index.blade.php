@@ -32,7 +32,7 @@
                                     <div class="d-flex align-items-center">
                                         <!-- <img src="{{ $practitioner->avatar }}" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Practitioner"> -->
                                         <div class="d-flex justify-content-between w-100">
-                                            <div class="h6 mb-0 lh-1">{{ $practitioner->user->name }}</div>
+                                            <div class="h6 mb-0 lh-1">{{ $practitioner->user->firstname }}</div>
                                             <div class="text-end">
                                                 <div class="dropdown">
                                                     <a data-bs-toggle="dropdown" href="#" class="btn p-1" aria-expanded="false">
