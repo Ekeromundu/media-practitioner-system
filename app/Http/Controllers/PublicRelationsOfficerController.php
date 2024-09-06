@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PublicRelationOfficer;
 use App\Models\PublicRelationsOfficer;
+
 class PublicRelationsOfficerController extends Controller
 {
        public function create()
@@ -35,8 +37,13 @@ class PublicRelationsOfficerController extends Controller
 
     public function index()
     {
-        $pros = PublicRelationsOfficer::where('status', 'approved')->get();
-        return view('public_relations_officers.index', compact('pros'));
+        $officers = PublicRelationOfficer::paginate(3);
+        $allOfficers =  PublicRelationOfficer::get();
+
+        return view('public_relations_officers.index', [
+            'officers' => $officers,
+            'allOfficers' => $allOfficers
+        ]);
     }
 
     public function show($id)

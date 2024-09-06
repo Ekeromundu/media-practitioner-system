@@ -1,10 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\MediaPractitionerController;
+use App\Http\Controllers\PublicRelationsOfficerController;
+use App\Http\Controllers\Admin\PublicRelationsOfficerApprovalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,14 +41,27 @@ Route::post('/admin/approve/{id}', [AdminController::class, 'approve'])->name('a
 Route::post('/admin/reject/{id}', [AdminController::class, 'reject'])->name('admin.reject');
 
 
-// feed back routes
+// pro feed back routes
 
-Route::get('/feedback/{pro_id}/create', [FeedbackController::class, 'create'])->name('feedback.create');
-Route::post('/feedback/{pro_id}', [FeedbackController::class, 'store'])->name('feedback.store');
+Route::get('/feedback/{id}/{user_id}/create', [FeedbackController::class, 'createPro'])->name('feedback.create');
+Route::post('/feedback/pro/{id}/{user_id}', [FeedbackController::class, 'storePro'])->name('feedback.store');
+
+//media feed back routes
+Route::get('/feedback/media/{pro_id}/create', [FeedbackController::class, 'create'])->name('feedback.create');
+Route::post('/feedback/media/{id}/{user_id}/store', [FeedbackController::class, 'storeMedia'])->name('feedback.media.store');
+
+Route::get('/feedback/show', [FeedbackController::class, 'show'])->name('feedback.show');
+
+// Route::get('/feedback/show', [FeedbackController::class, 'show'])->name('feedback.show');
+
+
 
 // PROs
-use App\Http\Controllers\PublicRelationsOfficerController;
-use App\Http\Controllers\Admin\PublicRelationsOfficerApprovalController;
+
+
+Route::get("/page", function(){
+    return View::make("home");
+ });
 
 Route::get('/public-relations-officers/register', [PublicRelationsOfficerController::class, 'create'])->name('public_relations_officers.create');
 Route::post('/public-relations-officers/register', [PublicRelationsOfficerController::class, 'store'])->name('public_relations_officers.store');
@@ -62,6 +78,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 //feedback
 Route::prefix('feedback')->group(function () {
-    Route::get('/create', [FeedbackController::class, 'create']);
+    Route::get('/create', [FeedbackController::class, 'create'])->name('feedback.create');
     Route::get('/show', [FeedbackController::class, 'show']);
 });

@@ -35,9 +35,12 @@ class MediaPractitionerController extends Controller
 
     public function index()
     {
-        $practitioners = MediaPractitioner::get();
+        $practitioners = MediaPractitioner::paginate(3);
+        $allPractitioners =  MediaPractitioner::get();
+
         return view('media_practitioners.index', [
-            'practitioners' => $practitioners
+            'practitioners' => $practitioners,
+            'all_practitioners' => $allPractitioners
         ]);
     }
 
